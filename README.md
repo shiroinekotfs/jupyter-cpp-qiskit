@@ -1,57 +1,54 @@
-# C++ Header template for Jupyter C++ kernel
+# Qiskit header for Jupyter C++ kernel
 
-C++ kernel for Jupyter headers template. Used to provide additional abilities for the kernel.
+```markdown
+This project is an add-on of another project: C++ kernel for Jupyter
+Visit here: https://github.com/shiroinekotfs/jupyter-cpp-kernel
+```
+
+Qiskit is an open-source SDK for working with quantum computers at the level of extended quantum circuits, operators, and primitives.
+
+For more information about the Qiskit Quantum Computing, check it out [here](https://github.com/Qiskit/qiskit)
 
 ## Getting started
 
-You can fork, import, or clone this template freely.
+### Minimum Requirements
 
-### Designing C++ header extension
+By default, this add-on already fixes all minimum requirements before preform any actual run. However, for best practice, you should also install [Jupyter Notebook](https://github.com/jupyter/notebook), or [JupyterLab](https://github.com/jupyterlab/jupyterlab).
 
-You may note these requirements in designing a C++ header for Jupyter.
+### Installing Qiskit header for C++ kernel
 
-* **DO NOT USE** `using namespace std;` in the HEADER. It may raise additional errors, including conflict with other headers, resulting in undefined states of the whole kernel. It is also causing some **security** issues on the Enterprise deployment, such as [Research Labs](https://github.com/TheFlightSims/research-labs)
+For new user, you can try one of these installation type, to get Qiskit header
 
-* No `stdin`. It includes these commands that are banned and cannot be executed generally once the external header is used:
+#### From PyPI (not published yet)
 
-```C++
-std::cin >> some_variables_1;
-cin >> some_variables_2;
-std::getline(std::cin, some_string_1);
-getline(cin, some_string_2);
+You can try install this header from PyPI
+
+```bash
+pip install jupyter-cpp-qiskit
 ```
 
-It is because the C++ kernel uses pre-processing to add the I/O for user interactive, which means it can only process on the pre-compile `.cpp` file on each cell, not headers.
+If your kernel installed with `all-users` mode, try to use `sudo` command
 
-* Using namespace for your header. We do recommend not requiring it. However, if you want a user to use the code globally, save the code as you usually do.
-
-* Include guard is **RECOMMENDED** to prevent any conflict while importing, declaring and using functions in C++ headers. To know what the guard is, check out this [Wikipedia page](https://en.wikipedia.org/wiki/Include_guard)
-
-### Versioning headers
-
-The version of headers must match the installed C++ kernel.
-
-In the file `setup.cfg`, you can edit the version in the line 4:
-
-```python
-4 version = 1.0.0a5
+```bash
+sudo pip install jupyter-cpp-qiskit
 ```
 
-Also, you can manipulate `setup.py` at the line 5:
+#### From GitHub
 
-```python
-5       version='1.0.0a5',
+You can try install this header from GitHub repo
+
+```bash
+pip install git+https://github.com/shiroinekotfs/jupyter-cpp-qiskit.git
 ```
 
-### Include header files into
+If your kernel installed with `all-users` mode, try to use `sudo` command
 
-The C++ kernel can only interpret headers under the `{environment_path}/share/cpp_header`, but not in the sub-folders. If you want to include headers that are also in the subfolder (for example, in this repo, in the `sample/res` folder), your master header (in this example the `sample.hpp`) must include these headers with your property path.
-
-Once it's completed, add all your headers in `setup.py` at line 22:
-
-```python
-22       data_files = [
-23           ("share/cpp_header", ['sample/sample.hpp']),
-24           ("share/cpp_header/res", ['sample/res/legacy.c', 'sample/res/linker.hpp'])
-25       ]
+```bash
+sudo pip install git+https://github.com/shiroinekotfs/jupyter-cpp-qiskit.git
 ```
+
+## Development
+
+For better development, try to clone this repo, then edit the header.
+
+Don't forget to follow our [best practices in designing and deploying C++ header](https://github.com/shiroinekotfs/jupyter-cpp-header-template?tab=readme-ov-file#designing-c-header-extension)
